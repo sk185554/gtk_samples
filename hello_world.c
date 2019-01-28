@@ -10,7 +10,9 @@ GdkPixbuf *create_pixbuf(const gchar * filename)
 	g_error_free(error);
 	}
 }
-
+void print_msg(GtkWidget *Widget, gpointer window){
+	g_printf("button clicked\n");
+}
 int main(int argc, char*argv[])
 {
 	gtk_init(&argc,&argv);//initialization of GTk
@@ -18,7 +20,8 @@ int main(int argc, char*argv[])
 	GdkPixbuf *icon;
 	window= gtk_window_new(GTK_WINDOW_TOPLEVEL);//create the window
 	label= gtk_label_new("Hello world");
-	button=gtk_button_new_with_label("Hello world");
+	button=gtk_button_new_with_mnemonic("_Hello world");
+	g_signal_connect(button,"clicked",G_CALLBACK(print_msg),NULL);
 	gtk_widget_set_tooltip_text(button,"Button Widget");
 	halign=gtk_alignment_new(0,0,0,0);
 	g_signal_connect(window, "delete_event",G_CALLBACK(gtk_main_quit),NULL);//if 'X' was clicked then exit from the program
